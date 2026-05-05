@@ -1,71 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Better Buy • Videos</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      text-align: center;
-      background: royalblue;
-      color: white;
-      padding: 15px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .video-container {
-      display: flex;
-      flex-direction: column;-------
-      align-items: center;
-      gap: 30px;
-      padding: 30px;
-    }
-    video {
-      width: 80%;
-      max-width: 700px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .back-btn {
-      display: inline-block;
-      margin: 20px;
-      text-decoration: none;
-      color: white;
-      background: royalblue;
-      padding: 10px 15px;
-      border-radius: 8px;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Product + Video — Stacked Cards</title>
+
+<style>
+  :root {
+    --card-w:420px;
+    --bg:#000;
+    --panel:#0b0b0b;
+    --muted:#9aa4b2;
+    --accent:#ff0055;
+  }
+
+  body {
+    margin:0;
+    background:var(--bg);
+    font-family:Arial, sans-serif;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+  }
+
+  .card {
+    width:100%;
+    max-width:var(--card-w);
+    background:var(--panel);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:30px;   /* ensures videos do NOT mix */
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+
+  .video-wrap {
+    width:100%;
+    aspect-ratio:9/16;
+    background:#000;
+  }
+
+  video {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .product {
+    display:flex;
+    gap:12px;
+    padding:14px;
+  }
+
+  .product-thumb {
+    width:120px;
+    height:90px;
+    overflow:hidden;
+    border-radius:8px;
+    background:#111;
+  }
+
+  .product-thumb img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .meta h3 {
+    margin:0 0 6px 0;
+    font-size:16px;
+  }
+
+  .price-row {
+    font-size:14px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+
+  .old { text-decoration:line-through; color:#888; }
+  .discount { color:#4cd964; font-weight:bold; }
+
+.shop-btn {
+  background: var(--accent);
+  padding: 2px 8px;        /* 🔥 minimum height */
+  border: none;
+  border-radius: 5px;      /* small rectangular corners */
+  color: #fff;
+  font-size: 11px;         /* very compact text */
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: auto;
+  line-height: 1;          /* 🔑 removes extra height */
+  white-space: nowrap;
+}
+
+.shop-btn:hover {
+  opacity: 0.9;
+}
+.end-actions {
+  width: 100%;
+  max-width: var(--card-w);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.end-btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.back-btn {
+  background: #333;
+  color: #fff;
+}
+
+.continue-btn {
+  background: var(--accent);
+  color: #fff;
+}
+
+.end-btn:hover {
+  opacity: 0.9;
+}
+#popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#popupBox {
+  background: #111;
+  padding: 20px 22px;
+  border-radius: 10px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.8);
+}
+
+#popupBox p {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+#popupBox button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+#popupBox button:hover {
+  opacity: 0.9;
+}
+
+
+
+</style>
 </head>
 <body>
 
-  <header>🎥 Better Buy – Styling Videos</header>
-
-  <a href="index.html" class="back-btn">⬅ Back to Home</a>
-
-  <div class="video-container">
-    <video controls>
-      <source src="videos/video1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-
-    <video controls>
-      <source src="videos/video2.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-
-    <video controls>
-      <source src="videos/video3.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+<!-- CARD 1 -->
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v1.mp4" type="video/mp4">
     </video>
   </div>
 
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product1.jpg" alt="Classic Professional Briefcase">
+    </div>
+
+    <div class="meta">
+      <h3>Classic Professional Briefcase</h3>
+      <div class="price-row">
+        <div>$ 22.50</div>
+        <div class="old"> $ 25</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_stripedshirt.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+<!-- CARD 2 -->
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product2.jpg" alt=" Compact Utility Waist Bag">
+    </div>
+
+    <div class="meta">
+      <h3>Compact Utility Waist Bag</h3>
+      <div class="price-row">
+        <div>$ 20.70</div>
+        <div class="old">$ 23</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_denimjacket.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+<!-- CARD 3 -->
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v3.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product3.jpg" alt=" Classic Flap Multi-Pocket Backpack">
+    </div>
+
+    <div class="meta">
+      <h3> Classic Flap Multi-Pocket Backpack</h3>
+      <div class="price-row">
+        <div>$ 23.40</div>
+        <div class="old">$ 26</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_yellowdresses.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+<!-- CARD 4 -->
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product4.png" alt="Compact Zip Crossbody Bag">
+    </div>
+
+    <div class="meta">
+      <h3>Compact Zip Crossbody Bag</h3>
+      <div class="price-row">
+        <div>$ 20.70</div>
+        <div class="old"> $ 23</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_graypants.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v5.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product5.jpg" alt=" Dual-Tone Convertible Backpack">
+    </div>
+
+    <div class="meta">
+      <h3>Dual-Tone Convertible Backpack</h3>
+      <div class="price-row">
+        <div>$ 24.70</div>
+        <div class="old">$ 27</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_matcha.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product6.jpg" alt=" Classic Leather Laptop Briefcase">
+    </div>
+
+    <div class="meta">
+      <h3>Classic Leather Laptop Briefcase</h3>
+      <div class="price-row">
+        <div>$ 22.50</div>
+        <div class="old">$ 25</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_linen.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="video-wrap">
+    <video playsinline controls preload="metadata">
+      <source src="new videos/v7.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="product">
+    <div class="product-thumb">
+      <img src="new images/product7.jpg" alt=" Everyday Canvas Tote Bag">
+    </div>
+
+    <div class="meta">
+      <h3>Everyday Canvas Tote Bag</h3>
+      <div class="price-row">
+        <div>$ 21.60</div>
+        <div class="old">$ 24</div>
+        <div class="discount">10% OFF</div>
+      </div>
+    </div>
+
+    <button class="shop-btn" onclick="location.href='clothing_hoodie.html'">
+      Shop Now
+    </button>
+  </div>
+</div>
+
+
+
+<!-- END BUTTONS -->
+<div class="end-actions" id="endSection">
+  <button class="end-btn back-btn" onclick="location.href='success2.html'">
+    ⬅ Back
+  </button>
+
+  <button class="end-btn continue-btn" onclick="location.href='   https://stansa.qualtrics.com/jfe/form/SV_cUAoNY2y0z2b7xk'">
+    Continue ➡
+  </button>
+</div>
+<script>
+  function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+  }
+
+  // Show popup once on page load
+  window.onload = function () {
+    document.getElementById("popupOverlay").style.display = "flex";
+  };
+</script>
+
+<!-- PAGE LOAD POPUP -->
+<div id="popupOverlay">
+  <div id="popupBox">
+    <p>Please scroll through all the videos and click on the <b>Continue</b> button at the end of the page.</p>
+    <button onclick="closePopup()">Okay</button>
+  </div>
+</div>
+
+
 </body>
+
 </html>
