@@ -26,22 +26,9 @@
       </div>
     </section>
 
-    <button onclick="postToCommunity()" class="btn full place-order">
-  Place Order
-</button>
+    <a href="styling-success.html" class="btn full place-order">Place Order</a>
   </main>
-<script>
-  function postToCommunity() {
-  const productData = {
-    name: "Classic Professional Briefcase",
-    image: "new images/product7.jpg"
-  };
 
-  localStorage.setItem("selectedProduct", JSON.stringify(productData));
-
-  window.location.href = "styling-success.html";
-}
-</script>
 </body>
 
 </html>
