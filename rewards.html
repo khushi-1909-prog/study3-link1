@@ -3,61 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Better Buy • Rewards</title>
+  <title>Zyntho • Rewards</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Top banner section */
+    .rewards-banner {
+      background: linear-gradient(135deg, #0057ff, #0099ff);
+      color: #fff;
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+    .rewards-banner h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .rewards-points {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1rem;
+    }
+     .reward-details {
+    background: #fff;
+    color: #000;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .reward-details h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: #333;
+  }
+  .reward-details ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    line-height: 1.6;
+  }
+  .reward-details li {
+    margin-bottom: 0.75rem;
+  }
+  .reward-details strong {
+    color: royalblue;
+  }
+
+    .points-box {
+      background: #fff;
+      color: #000;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      text-align: center;
+      flex: 1;
+      margin: 0 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .points-box h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+    .points-box button {
+      background: #ffcc00;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Progress bar image section */
+    .progress-section {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .progress-section img {
+       max-width: 500px;   /* limits image width */
+       width: 100%;        /* keeps it responsive */
+       height: auto;       /* maintains aspect ratio */
+       display: block;
+       margin: 0 auto;     /* centers the image */
+       border-radius: 10px;
+    }
+    /* Rewards grid tweaks */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+      margin-top: 2rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      max-width: 240px;
+    }
+    .card img {
+      border-radius: 8px;
+    }
+    .sub {
+      font-size: 0.85rem;
+      color: gray;
+      margin: 0.2rem 0 0.1rem 0;
+      text-align: center;
+    }
+    .offer-tag {
+      color: royalblue;
+      font-weight: 500;
+    }
+    .card .btn.small {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+    }
+  </style>
 </head>
 <body>
   <header class="navbar">
-    <a href="index.html" class="icon-btn"><i class="fas fa-arrow-left"></i></a>
-    <h1 class="brand">Better Buy</h1>
+   
   </header>
 
   <main class="container">
-    <!-- Top tab buttons -->
-    <div class="btn-group top-center">
-      <a href="index.html" class="btn small"> Clothing</a>
-      <a href="styling.html" class="btn small">✨ Styling</a>
-      <button class="btn small outline active">🎉 Rewards</button>
-    </div>
+    <!-- Banner section -->
+    <section class="rewards-banner">
+    <h2>Congratulations, you have won 100 cash back points! </h2>
+      <p>Redeem your Zyntho Coins now!</p>
+      <p>5 cashback points = ₹1</p>
+      <div class="rewards-points">
+        <div class="points-box">
+          <h3>100</h3>
+          <p>Cashback Points</p>
+          
+        </div>
+        <div class="points-box">
+          <h3>1</h3>
+          <p>Voucher</p>
+         
+        </div>
+      </div>
+    </section>
 
+    <!-- Progress Bar Section -->
+    <section class="progress-section">
+  <div class="reward-details">
+    <h3>Reward Tiers</h3>
+    <ul>
+      <li><strong>Monthly spend of ₹2000</strong> – <strong>Bronze Badge</strong> with 5% cashback points on every purchase.</li>
+      <li><strong>Monthly spend of ₹2000–₹5000</strong> – <strong>Silver Badge</strong> with 7.5% cashback points plus free delivery on every purchase.</li>
+      <li><strong>Monthly spend of ₹5000 or more</strong> – <strong>Gold Badge</strong> with 10% cashback points, free delivery, and exclusive monthly gifts.</li>
+    </ul>
+  </div>
+</section>
+
+
+    <!-- Top tab buttons -->
+    
     <!-- Rewards Grid -->
     <section class="grid">
-      <!-- Card 1 -->
-       
-        <article class="card">
-        <img src="/images/striped tshirt.jpg" alt="Levi's" />
-        <h3>Extra Rs. 50 Off On Levi's</h3>
+      <article class="card">
+        <img src="new images/R1.png" alt=" Borcelle Bag" />
+        <h3>Extra Rs. 50 Off On Borcelle Bag</h3>
         <p class="sub">Products on offer</p>
         <p class="sub offer-tag">2x off Using Coins</p>
-        <button class="btn small">Use 💰 5</button>
-        </article>
+        <a href="success2.html" class="btn small">Use 💰 5</a>
+      </article>
 
-      <!-- Card 2 -->
-        
-        <article class="card">
-        <img src="/images/yellow dress.jpg" alt="Miss chase" />
-        <h3>Extra Rs. 50 Off On Miss chase</h3>
+      <article class="card">
+        <img src="new images/R2.png" alt=" Lavana Bag Store" />
+        <h3>Extra Rs. 100 Off On Lavana Bag Store</h3>
         <p class="sub">Products on offer</p>
         <p class="sub offer-tag">2x off Using Coins</p>
-        <button class="btn small">Use 💰 5</button>
-        </article>
+        <a href="success2.html" class="btn small">Use 💰 5</a>
+      </article>
 
-      <!-- Card 3 -->
-        <article class="card">
-        <img src="/images/denim jacket.jpg" alt="Klosia" />
-        <h3>Extra Rs. 50 Off On Klosia</h3>
+      <article class="card">
+        <img src="new images/R3.png" alt= "Larana Bag Store" />
+        <h3>Extra 25% Off On Larana Bag Store</h3>
         <p class="sub">Products on offer</p>
         <p class="sub offer-tag">2x off Using Coins</p>
-        <button class="btn small">Use 💰 5</button>
-        </article>
+        <a href="success2.html" class="btn small">Use 💰 5</a>
+      </article>
 
-        <article class="card">
-        <img src="/images/gray pants.jpg" alt="Levi's" />
-        <h3>Extra Rs. 20 Off On Levi's</h3>
+      <article class="card">
+        <img src="new images/R4.png" alt=" Rimberio Backpack" />
+        <h3>Extra Rs. 20 Off On Rimberio Backpack</h3>
         <p class="sub">Products on offer</p>
         <p class="sub offer-tag">2x off Using Coins</p>
-        <button class="btn small">Use 💰 5</button>
-        </article>
+        <a href="success2.html" class="btn small">Use 💰 5</a>
+      </article>
     </section>
   </main>
 </body>
@@ -65,3 +205,13 @@
 
 
 
+
+
+
+
+
+
+
+
+
+  
