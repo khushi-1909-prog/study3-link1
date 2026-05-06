@@ -234,6 +234,12 @@
   opacity: 0.9;
 }
 
+#video-btn.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @keyframes popupFade {
   from {
     transform: scale(0.9);
@@ -371,18 +377,26 @@
     
   <script>
 
-  window.onload = function () {
-    const popup = document.getElementById("order-popup");
-    const closeBtn = document.getElementById("close-popup");
+window.onload = function () {
+  const popup = document.getElementById("order-popup");
+  const closeBtn = document.getElementById("close-popup");
 
-    // Show popup on page load
-    popup.style.display = "flex";
+  // Show popup
+  popup.style.display = "flex";
 
-    // Close popup
-    closeBtn.onclick = function () {
-      popup.style.display = "none";
-    };
+  // Close popup
+  closeBtn.onclick = function () {
+    popup.style.display = "none";
   };
+
+  // 🔥 Disable video button if coming from intro2.html
+  const params = new URLSearchParams(window.location.search);
+  const videoBtn = document.getElementById("video-btn");
+
+  if (params.get("from") === "intro") {
+    videoBtn.classList.add("disabled");
+  }
+};
 
 
 
